@@ -8,7 +8,7 @@ function Layout() {
             <h1 className="text-4xl font-extrabold text-white">Administrador de Productos</h1>
         </div>
     </header>
-    <main className="mt-10 mx-auto max-w-6xl p-10 bg-white shadow">
+    <main className="mt-10 mx-auto max-w-6xl p-10 bg-white shadow rounded">
     <Outlet/>
     </main>
     </>
