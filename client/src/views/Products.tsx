@@ -1,13 +1,18 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { getProducts } from "../services/ProductServices";
+import { Link, useLoaderData, ActionFunctionArgs } from "react-router-dom";
+import { getProducts, updateProductAvailability } from "../services/ProductServices";
 import ProductDetails from "../components/ProductDetails";
 import { Product } from "../types";
 
 export async function loader() {
-  console.log("desde loader..");
   const products = await getProducts();
 
   return products;
+}
+
+export async function action({request} : ActionFunctionArgs) {
+  const data = Object.fromEntries(await request.formData())
+  await updateProductAvailability(+data.id)
+  return {}
 }
 
 function Products() {
@@ -18,7 +23,7 @@ function Products() {
       <div className="flex justify-between">
         <h2 className="text-4xl font-black text-slate-500 ">Productos</h2>
         <Link
-          to="products/nuevo"
+          to="productos/nuevo"
           className="rounded-md bg-indigo-600 p-3 text-sm font-bold text-white shadow-sm hover:bg-indigo-500"
         >
           Agregar Producto
